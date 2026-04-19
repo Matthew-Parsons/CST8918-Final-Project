@@ -1,10 +1,10 @@
 resource "azurerm_resource_group" "backend" {
-  name     = var.resource_group_name
+  name     = "cst8918-tf-rg"
   location = var.location
 }
 
 resource "azurerm_storage_account" "backend" {
-  name                     = var.storage_account_name
+  name                     = "cst8918tfstorage123"
   resource_group_name      = azurerm_resource_group.backend.name
   location                 = azurerm_resource_group.backend.location
   account_tier             = "Standard"
@@ -13,7 +13,7 @@ resource "azurerm_storage_account" "backend" {
 }
 
 resource "azurerm_storage_container" "tfstate" {
-  name                  = var.container_name
+  name                  = "tfstate"
   storage_account_id    = azurerm_storage_account.backend.id
   container_access_type = "private"
 }
