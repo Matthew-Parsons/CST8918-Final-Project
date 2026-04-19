@@ -4,9 +4,9 @@ This capstone project applies the many Infrastructure as Code (IaC) topics that 
 The Azure configuration will be stored in a Terraform backend in Azure Blob Storage. The Terraform code will be organized into modules to manage the resources. The project will simulate a real-world scenario with multiple team members collaborating on the project, and multiple environments (dev, test, prod) to manage.
 
 # Team members
-Matthew Parsons: https://github.com/Matthew-Parsons
-Dom Heallis: https://github.com/DomHeallis
-Jediael Mendoza: https://github.com/mend0214
-Obaida Kandakji: https://github.com/ObaidaKandakji
+- Matthew Parsons: https://github.com/Matthew-Parsons
+- Dom Heallis: https://github.com/DomHeallis
+- Jediael Mendoza: https://github.com/mend0214
+- Obaida Kandakji: https://github.com/ObaidaKandakji
 
 # Instructions
