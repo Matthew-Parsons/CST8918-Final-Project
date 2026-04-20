@@ -33,4 +33,4 @@ jobs:
         run: terraform init -upgrade
 
       - name: Terraform apply
-        run: terraform apply -auto-approve -var="subscription_id=${{ secrets.AZURE_SUBSCRIPTION_ID }}" -var="weather_api_key=${{ secrets.WEATHER_API_KEY }}"
+        run: terraform apply -input=false -auto-approve -var="subscription_id=${{ secrets.AZURE_SUBSCRIPTION_ID }}" -var="weather_api_key=${{ secrets.WEATHER_API_KEY }}"
