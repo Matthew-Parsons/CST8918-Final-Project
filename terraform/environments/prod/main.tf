@@ -25,41 +25,48 @@ provider "azurerm" {
   subscription_id = var.subscription_id
 }
 
-module "network" {
-  source              = "../../modules/network"
-  resource_group_name = "cst8918-final-project-group-8"
-  location            = var.location
+data "azurerm_resource_group" "main" {
+  name = "cst8918-final-project-group-8"
+}
+
+data "azurerm_virtual_network" "main" {
+  name                = "cst8918-vnet"
+  resource_group_name = data.azurerm_resource_group.main.name
+}
+
+data "azurerm_subnet" "prod" {
+  name                 = "cst8918-prod-subnet"
+  virtual_network_name = data.azurerm_virtual_network.main.name
+  resource_group_name  = data.azurerm_resource_group.main.name
+}
+
+data "azurerm_container_registry" "acr" {
+  name                = "cst8918acr8jm26"
+  resource_group_name = data.azurerm_resource_group.main.name
 }
 
 module "aks" {
   source              = "../../modules/aks"
   cluster_name        = "cst8918-prod-aks"
-  resource_group_name = module.network.resource_group_name
-  location            = module.network.location
-  subnet_id           = module.network.prod_subnet_id
+  resource_group_name = data.azurerm_resource_group.main.name
+  location            = data.azurerm_resource_group.main.location
+  subnet_id           = data.azurerm_subnet.prod.id
   enable_auto_scaling = true
   min_count           = 1
   max_count           = 3
 }
 
-module "acr" {
-  source              = "../../modules/acr"
-  name                = "cst8918acr8jm26"
-  resource_group_name = module.network.resource_group_name
-  location            = module.network.location
-}
-
 module "redis" {
   source              = "../../modules/redis"
   name                = "cst8918-prod-redis-8jm26"
-  resource_group_name = module.network.resource_group_name
-  location            = module.network.location
+  resource_group_name = data.azurerm_resource_group.main.name
+  location            = data.azurerm_resource_group.main.location
 }
 
 resource "azurerm_role_assignment" "acr_pull" {
   principal_id         = module.aks.kubelet_object_id
   role_definition_name = "AcrPull"
-  scope                = module.acr.id
+  scope                = data.azurerm_container_registry.acr.id
 }
 
 provider "kubernetes" {
@@ -72,7 +79,7 @@ provider "kubernetes" {
 module "app" {
   source          = "../../modules/k8s-app"
   namespace       = "weather"
-  image           = "${module.acr.login_server}/weather-app:${var.image_tag}"
+  image           = "${data.azurerm_container_registry.acr.login_server}/weather-app:${var.image_tag}"
   weather_api_key = var.weather_api_key
   redis_host      = module.redis.hostname
   redis_port      = module.redis.ssl_port

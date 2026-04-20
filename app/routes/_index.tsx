@@ -14,6 +14,7 @@ export const meta: MetaFunction = () => {
   ]
 }
 
+// test CI workflow
 const location = {
   city: 'Ottawa',
   postalCode: 'K2G 1V8', // Algonquin College, Woodroffe Campus
