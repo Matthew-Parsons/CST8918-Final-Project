@@ -1,4 +1,4 @@
-# CST8918 Final Project – Remix Weather Application on Azure AKS
+# CST8918 Final Project – Terraform, Azure AKS, and GitHub Actions
 
 ## Project Overview
 
