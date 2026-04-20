@@ -3,7 +3,7 @@ terraform {
 
   backend "azurerm" {
     resource_group_name  = "cst8918-tf-rg"
-    storage_account_name = "cst8918tfstorage808"
+    storage_account_name = "cst8918tfstg808"
     container_name       = "tfstate"
     key                  = "test.terraform.tfstate"
   }
@@ -15,7 +15,7 @@ terraform {
     }
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = "~> 2.30"
+      version = "~> 2.38"
     }
   }
 }
@@ -43,14 +43,14 @@ module "aks" {
 
 module "acr" {
   source              = "../../modules/acr"
-  name                = "cst8918acr808"
+  name                = "cst8918acr8jm26"
   resource_group_name = module.network.resource_group_name
   location            = module.network.location
 }
 
 module "redis" {
   source              = "../../modules/redis"
-  name                = "cst8918-test-redis-g808"
+  name                = "cst8918-test-redis-8jm26"
   resource_group_name = module.network.resource_group_name
   location            = module.network.location
 }
