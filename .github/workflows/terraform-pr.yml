@@ -6,6 +6,10 @@ on:
     paths:
       - 'terraform/**'
 
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
   plan-test:
     runs-on: ubuntu-latest
@@ -30,10 +34,11 @@ jobs:
       - name: Terraform init
         run: terraform init
 
+      - name: TFLint init
+        run: tflint --init
+
       - name: TFLint
-        run: |
-          tflint --init
-          tflint
+        run: tflint
 
       - name: Terraform plan
-        run: terraform plan -var="subscription_id=${{ secrets.AZURE_SUBSCRIPTION_ID }}" -var="weather_api_key=${{ secrets.WEATHER_API_KEY }}"
+        run: terraform plan -input=false -var="subscription_id=${{ secrets.AZURE_SUBSCRIPTION_ID }}" -var="weather_api_key=${{ secrets.WEATHER_API_KEY }}"
