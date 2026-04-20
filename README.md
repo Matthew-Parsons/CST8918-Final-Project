@@ -19,7 +19,7 @@ The Azure configuration will be stored in a Terraform backend in Azure Blob Stor
 - Dom Healis  
   https://github.com/DomHeallis
 
-- Obaida Kandakji
+- Obaida Kandakji  
   https://github.com/ObaidaKandakji
 
 ---
