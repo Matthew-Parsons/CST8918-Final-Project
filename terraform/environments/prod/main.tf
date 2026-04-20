@@ -51,7 +51,7 @@ module "acr" {
 
 module "redis" {
   source              = "../../modules/redis"
-  name                = "cst8918-prod-redis"
+  name                = "cst8918-prod-redis-g808"
   resource_group_name = module.network.resource_group_name
   location            = module.network.location
 }
