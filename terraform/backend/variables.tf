@@ -7,5 +7,5 @@ variable "location" {
 variable "storage_account_name" {
   description = "Globally unique storage account name"
   type        = string
-  default     = "cst8918tfstorage808"
+  default     = "cst8918tfstg808"
 }

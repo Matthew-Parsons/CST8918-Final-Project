@@ -16,7 +16,7 @@ variable "subnet_id" {
 
 variable "kubernetes_version" {
   type    = string
-  default = "1.32"
+  default = "1.34.4"
 }
 
 variable "vm_size" {
@@ -42,4 +42,14 @@ variable "min_count" {
 variable "max_count" {
   type    = number
   default = 3
+}
+
+variable "service_cidr" {
+  type    = string
+  default = "172.20.0.0/16"
+}
+
+variable "dns_service_ip" {
+  type    = string
+  default = "172.20.0.10"
 }
