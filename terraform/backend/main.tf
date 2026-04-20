@@ -4,7 +4,7 @@ resource "azurerm_resource_group" "backend" {
 }
 
 resource "azurerm_storage_account" "backend" {
-  name                     = "cst8918tfstorage123"
+  name                     = var.storage_account_name
   resource_group_name      = azurerm_resource_group.backend.name
   location                 = azurerm_resource_group.backend.location
   account_tier             = "Standard"
