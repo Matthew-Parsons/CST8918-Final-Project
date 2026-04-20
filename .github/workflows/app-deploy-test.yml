@@ -37,7 +37,4 @@ jobs:
         run: terraform init -upgrade
 
       - name: Deploy app to test AKS
-        run: terraform apply -input=false -auto-approve \
-          -var="subscription_id=${{ secrets.AZURE_SUBSCRIPTION_ID }}" \
-          -var="weather_api_key=${{ secrets.WEATHER_API_KEY }}" \
-          -var="image_tag=${{ github.sha }}"
+        run: terraform apply -input=false -auto-approve -var="subscription_id=${{ secrets.AZURE_SUBSCRIPTION_ID }}" -var="weather_api_key=${{ secrets.WEATHER_API_KEY }}" -var="image_tag=${{ github.sha }}"

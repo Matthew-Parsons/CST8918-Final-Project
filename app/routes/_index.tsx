@@ -24,6 +24,7 @@ const location = {
 }
 const units = 'metric'
 
+// test deploy to test AKS workflow
 export async function loader() {
   // TODO: accept query params for location and units
   // TODO: look up location by postal code
