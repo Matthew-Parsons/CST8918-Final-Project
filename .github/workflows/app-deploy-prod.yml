@@ -35,7 +35,7 @@ jobs:
       - uses: hashicorp/setup-terraform@v3
 
       - name: Terraform init
-        run: terraform init
+        run: terraform init -upgrade
 
       - name: Deploy updated image
         run: terraform apply -auto-approve -var="subscription_id=${{ secrets.AZURE_SUBSCRIPTION_ID }}" -var="weather_api_key=${{ secrets.WEATHER_API_KEY }}" -var="image_tag=${{ github.sha }}"
