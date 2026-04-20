@@ -21,6 +21,8 @@ resource "kubernetes_secret" "app_secrets" {
 }
 
 resource "kubernetes_deployment" "app" {
+  wait_for_rollout = false
+
   metadata {
     name      = "weather-app"
     namespace = kubernetes_namespace.app.metadata[0].name
@@ -31,6 +33,15 @@ resource "kubernetes_deployment" "app" {
 
   spec {
     replicas = 1
+
+    strategy {
+      type = "RollingUpdate"
+
+      rolling_update {
+        max_surge       = 1
+        max_unavailable = 0
+      }
+    }
 
     selector {
       match_labels = {
