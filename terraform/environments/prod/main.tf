@@ -58,7 +58,7 @@ module "aks" {
 
 module "redis" {
   source              = "../../modules/redis"
-  name                = "cst8918-prod-redis"
+  name                = "cst8918-prod-redis-8jm26"
   resource_group_name = data.azurerm_resource_group.main.name
   location            = data.azurerm_resource_group.main.location
 }
